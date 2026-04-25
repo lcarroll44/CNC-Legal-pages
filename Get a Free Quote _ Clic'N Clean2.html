@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get a Free Quote | Clic'N Clean</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1B6FD4;
+      --dark-blue: #1A4FAA;
+      --light-blue: #E8F1FB;
+      --text: #1a1a2e;
+      --muted: #5a6a7a;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --error: #dc2626;
+      --success: #16a34a;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); padding: 2rem 1rem; }
+
+    .form-card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(27,111,212,0.08);
+    }
+
+    .form-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-card .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    label .required { color: var(--error); margin-left: 2px; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(27,111,212,0.1);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* CONSENT BOX */
+    .consent-box {
+      background: var(--light-blue);
+      border: 1.5px solid var(--blue);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .consent-box .consent-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--dark-blue);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--blue);
+      border-radius: 4px;
+    }
+
+    .checkbox-label {
+      font-size: 0.875rem;
+      color: var(--dark-blue);
+      line-height: 1.6;
+    }
+
+    .checkbox-label a {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    .consent-details {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(27,111,212,0.2);
+    }
+
+    .consent-details strong { color: var(--dark-blue); }
+
+    /* AGE RESTRICTION */
+    .age-box {
+      background: #fff8e1;
+      border: 1.5px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .age-box .age-icon { font-size: 1.25rem; margin-top: 1px; }
+
+    .age-box p {
+      font-size: 0.85rem;
+      color: #92400e;
+      line-height: 1.5;
+    }
+
+    .age-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .age-checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      cursor: pointer;
+      accent-color: #f59e0b;
+    }
+
+    .age-checkbox-row label {
+      font-size: 0.85rem;
+      color: #92400e;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    /* SUBMIT */
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+
+    .submit-btn:hover { background: var(--dark-blue); transform: translateY(-1px); }
+    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
+
+    .error-msg {
+      color: var(--error);
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+      display: none;
+    }
+
+    .success-banner {
+      background: #f0fdf4;
+      border: 1.5px solid #16a34a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      display: none;
+    }
+
+    .success-banner h3 { color: var(--success); font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .success-banner p { color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<div class="form-card">
+  <h2>Get a Free Quote</h2>
+  <p class="subtitle">Fill out the form below and we'll get back to you within 1 hour.</p>
+
+  <div class="success-banner" id="successBanner">
+    <h3>✅ Quote Request Sent!</h3>
+    <p>Thank you! A Clic'N Clean representative will contact you within 1 hour.</p>
+  </div>
+
+  <form id="quoteForm" novalidate>
+
+    <!-- Honeypot (hidden from real users) -->
+    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off" />
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name <span class="required">*</span></label>
+        <input type="text" name="first_name" placeholder="Jane" required />
+        <div class="error-msg" id="err-first_name">Please enter your first name.</div>
+      </div>
+      <div class="form-group">
+        <label>Last Name <span class="required">*</span></label>
+        <input type="text" name="last_name" placeholder="Smith" required />
+        <div class="error-msg" id="err-last_name">Please enter your last name.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email Address <span class="required">*</span></label>
+      <input type="email" name="email" placeholder="jane@example.com" required />
+      <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number <span class="required">*</span></label>
+      <input type="tel" name="phone" placeholder="(214) 555-0000" required />
+      <div class="error-msg" id="err-phone">Please enter your phone number.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Service Address <span class="required">*</span></label>
+      <input type="text" name="address" placeholder="123 Main St, Dallas, TX 75201" required />
+      <div class="error-msg" id="err-address">Please enter the service address.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Service Type <span class="required">*</span></label>
+      <select name="service_type" required>
+        <option value="">Select a service...</option>
+        <option value="Standard Clean">Standard Clean</option>
+        <option value="Deep Clean">Deep Clean</option>
+        <option value="Move In / Move Out">Move In / Move Out</option>
+        <option value="Airbnb / STR Turnover">Airbnb / STR Turnover</option>
+        <option value="Office / Commercial">Office / Commercial</option>
+      </select>
+      <div class="error-msg" id="err-service_type">Please select a service type.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Additional Notes</label>
+      <textarea name="message" rows="3" placeholder="Any special instructions or questions?"></textarea>
+    </div>
+
+    <!-- AGE RESTRICTION -->
+    <div class="age-box">
+      <span class="age-icon">🔞</span>
+      <div>
+        <p>Our services are intended for individuals <strong>18 years of age or older.</strong></p>
+        <div class="age-checkbox-row">
+          <input type="checkbox" id="ageCheck" name="age_confirmed" required />
+          <label for="ageCheck">I confirm I am 18 years of age or older <span class="required">*</span></label>
+        </div>
+        <div class="error-msg" id="err-age" style="display:none;">You must confirm you are 18 or older.</div>
+      </div>
+    </div>
+
+    <!-- SMS CONSENT BOX -->
+    <div class="consent-box">
+      <div class="consent-title">📱 SMS Communication Consent</div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="smsConsent" name="sms_consent" required />
+        <label class="checkbox-label" for="smsConsent">
+          I agree to receive SMS text messages from <strong>Clic'N Clean</strong> (optional — not required to receive services) regarding appointment confirmations, booking reminders, payment notifications, job completion updates, and review requests. Message frequency: 2–5 messages per booking. Message &amp; data rates may apply. Reply <strong>STOP</strong> to opt out, <strong>HELP</strong> for help.
+        </label>
+      </div>
+      <div class="error-msg" id="err-sms" style="display:none;">Please confirm your SMS consent to proceed.</div>
+      <div class="consent-details">
+        <strong>Message types:</strong> Appointment confirmations, booking reminders, payment notifications, job completion updates, review requests, and rebooking reminders.<br /><br />
+        <strong>Message frequency:</strong> Typically 2–5 messages per booking.<br />
+        <strong>Message & data rates may apply.</strong><br /><br />
+        <strong>To opt out:</strong> Reply <strong>STOP</strong> to any message at any time.<br />
+        <strong>For help:</strong> Reply <strong>HELP</strong> or email cleaning@httservicepros.com<br /><br />
+        By checking this box you agree to our
+        <a href="https://lcarroll44.github.io/CNC-Legal-pages/privacy-policy.html" target="_blank">Privacy Policy</a> and
+        <a href="https://lcarroll44.github.io/CNC-Legal-pages/terms-and-conditions.html" target="_blank">Terms & Conditions</a>.
+        We will never sell or share your phone number with third parties.
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Get My Free Quote →</button>
+
+  </form>
+</div>
+
+<script>
+  const WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/26646304/ujx3694/';
+
+  const form = document.getElementById('quoteForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successBanner = document.getElementById('successBanner');
+
+  function showError(id, show) {
+    const el = document.getElementById('err-' + id);
+    if (el) el.style.display = show ? 'block' : 'none';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    let valid = true;
+
+    // Validate required text fields
+    ['first_name', 'last_name', 'email', 'phone', 'address', 'service_type'].forEach(field => {
+      const el = form.querySelector(`[name="${field}"]`);
+      const empty = !el || !el.value.trim();
+      showError(field, empty);
+      if (empty) valid = false;
+    });
+
+    // Validate age checkbox
+    const ageCheck = document.getElementById('ageCheck');
+    if (!ageCheck.checked) {
+      document.getElementById('err-age').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('err-age').style.display = 'none';
+    }
+
+    // SMS consent required
+    const smsConsent = document.getElementById('smsConsent');
+    if (!smsConsent.checked) {
+      document.getElementById('err-sms').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('err-sms').style.display = 'none';
+    }
+
+    if (!valid) return;
+
+    // Honeypot check
+    const honeypot = form.querySelector('[name="website"]');
+    if (honeypot && honeypot.value) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const data = {
+      first_name: form.querySelector('[name="first_name"]').value.trim(),
+      last_name: form.querySelector('[name="last_name"]').value.trim(),
+      email: form.querySelector('[name="email"]').value.trim(),
+      phone: form.querySelector('[name="phone"]').value.trim(),
+      address: form.querySelector('[name="address"]').value.trim(),
+      service_type: form.querySelector('[name="service_type"]').value,
+      message: form.querySelector('[name="message"]').value.trim(),
+      sms_consent: smsConsent.checked,
+      age_confirmed: ageCheck.checked,
+      source: 'Website',
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        mode: 'no-cors',
+      });
+      form.style.display = 'none';
+      successBanner.style.display = 'block';
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get My Free Quote →';
+      alert('Something went wrong. Please try again or call us directly.');
+    }
+  });
+</script>
+
+</body>
+</html>
